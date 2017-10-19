@@ -42,7 +42,7 @@ for i in range(2) :
 #Creating a list to keep track of all the 80 trials which should be done during on experiment
 index = []
 for j in range(5):
-    for i in range(32):
+    for i in range(16):
         index.append(i)
         
 
@@ -168,8 +168,8 @@ def save_result_to_csv(path,name,age,gender, colour_bld,eyesight,native_language
 
 def experiment_mth(name,age,gender, colour_bld,eyesight,native_language,exp) :
     
-    nbr_blue = exp[0][0]
-    nbr_red = exp[0][1]
+    nbr_blue = exp[0][1]
+    nbr_red = exp[0][0]
     ratio = float("{0:.2f}".format(nbr_blue/nbr_red))
     if exp[1] == 1 : 
         nbr_red,nbr_blue = nbr_blue,nbr_red
@@ -179,9 +179,7 @@ def experiment_mth(name,age,gender, colour_bld,eyesight,native_language,exp) :
         correct_answer = 'No'
     display_image(size,nbr_red,nbr_blue,radius,dist,'Are more than half of the dots blue ?')
     answer,answer_time = record_RT()
-    if answer == correct_answer and color=='blue': 
-        answer = 'right'
-    elif answer != correct_answer and color=='red':
+    if answer == correct_answer : 
         answer = 'right'
     else : 
         answer = 'wrong'
@@ -192,8 +190,8 @@ def experiment_mth(name,age,gender, colour_bld,eyesight,native_language,exp) :
     
 def experiment_most(name,age,gender, colour_bld,eyesight,native_language,exp) :
 
-    nbr_blue = exp[0][0]
-    nbr_red = exp[0][1]
+    nbr_blue = exp[0][1]
+    nbr_red = exp[0][0]
     ratio = float("{0:.2f}".format(nbr_blue/nbr_red))
     if exp[1] == 1 : 
         nbr_red,nbr_blue = nbr_blue,nbr_red
@@ -201,16 +199,15 @@ def experiment_most(name,age,gender, colour_bld,eyesight,native_language,exp) :
         correct_answer = 'Yes'
     else :
         correct_answer = 'No'
-    display_image(size,nbr_red,nbr_blue,radius,paired,dist,'Are most of the dots blue ?')
+    print(correct_answer)
+    display_image(size,nbr_red,nbr_blue,radius,dist,'Are most of the dots blue ?')
     answer,answer_time = record_RT()
-    if answer == correct_answer and color=='blue': 
-        answer = 'right'
-    elif answer != correct_answer and color=='red':
+    if answer == correct_answer : 
         answer = 'right'
     else : 
         answer = 'wrong'
     print answer
-    save_result_to_csv(save_path_csv,name,age,gender, colour_bld,eyesight,native_language,nbr_blue,nbr_red,ratio,answer,answer_time,'most')
+    save_result_to_csv(save_path_csv,name,age,gender, colour_bld,eyesight,native_language,nbr_blue,nbr_red,ratio,answer,answer_time,'more than half')
     plt.close() 
     time.sleep(0.5)
     
