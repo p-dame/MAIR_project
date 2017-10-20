@@ -77,7 +77,7 @@ def display_image(size,n1,n2,radius,dist,legend) :
             x ,y = rd.uniform(-size+radius,size-radius) , rd.uniform(-size+radius,size-radius)
             check = check_distance_dots(x,y,list_dots,dist_min)
         list_dots.append((x,y))            
-        ax.add_artist(plt.Circle((x,y),radius,color='r'))
+        ax.add_artist(plt.Circle((x,y),radius,color='y'))
     for red_dot in range(n2):
         check = 0
         while check < dist_min : 
@@ -116,11 +116,11 @@ def display_image_paired_dots(size,n1,n2,radius,dist,legend) :
             check = check_distance_dots(x2,y2,list_dots,dist_min)
         list_dots.append((x2,y2))
         ax.add_artist(plt.Circle((x1,y1),radius,color='b'))
-        ax.add_artist(plt.Circle((x2,y2),radius,color='r'))
+        ax.add_artist(plt.Circle((x2,y2),radius,color='y'))
     nbr_isolated_dots = abs(n1-n2)
     color_dots = 'b'
     if n1 > n2 : 
-        color_dots = 'r'
+        color_dots = 'y'
     for dot in range(nbr_isolated_dots) : 
         check = 0
         while check < dist_min : 
