@@ -46,7 +46,7 @@ for j in range(5):
     for i in range(16):
         index.append(i)
         
-exp = ((4,5),0)
+exp = ((4,5),0,0)
         
 
 #----------FUNCTIONS -----------------------------------------------------------------
@@ -176,16 +176,16 @@ def experiment_mth(exp) :
     ratio = float("{0:.2f}".format(nbr_blue/nbr_red))
     if exp[1] == 1 : 
         nbr_red,nbr_blue = nbr_blue,nbr_red
-    if nbr_blue > nbr_red :
-        correct_answer = 'Yes'
-    else :
-        correct_answer = 'No'
+#    if nbr_blue > nbr_red :
+#        correct_answer = 'Yes'
+#    else :
+#        correct_answer = 'No'
     plot = display_image(size,nbr_red,nbr_blue,radius,dist,'Are more than half of the dots blue ?')
-    answer,answer_time = record_RT()
-    if answer == correct_answer : 
-        answer = 'right'
-    else : 
-        answer = 'wrong'
+#    answer,answer_time = record_RT()
+#    if answer == correct_answer : 
+#        answer = 'right'
+#    else : 
+#        answer = 'wrong'
 #    save_result_to_csv(save_path_csv,name,age,gender, colour_bld,eyesight,native_language,nbr_blue,nbr_red,ratio,answer,answer_time,'more than half')
 #    plt.close() 
     return plot
@@ -197,29 +197,33 @@ def experiment_most(exp) :
     ratio = float("{0:.2f}".format(nbr_blue/nbr_red))
     if exp[1] == 1 : 
         nbr_red,nbr_blue = nbr_blue,nbr_red
-    if nbr_blue > nbr_red :
-        correct_answer = 'Yes'
-    else :
-        correct_answer = 'No'
-    print(correct_answer)
-    display_image(size,nbr_red,nbr_blue,radius,dist,'Are most of the dots blue ?')
-    answer,answer_time = record_RT()
-    if answer == correct_answer : 
-        answer = 'right'
-    else : 
-        answer = 'wrong'
+#    if nbr_blue > nbr_red :
+#        correct_answer = 'Yes'
+#    else :
+#        correct_answer = 'No'
+#    print(correct_answer)
+    plot = display_image(size,nbr_red,nbr_blue,radius,dist,'Are most of the dots blue ?')
+#    answer,answer_time = record_RT()
+#    if answer == correct_answer : 
+#        answer = 'right'
+#    else : 
+#        answer = 'wrong'
 #    save_result_to_csv(save_path_csv,name,age,gender, colour_bld,eyesight,native_language,nbr_blue,nbr_red,ratio,answer,answer_time,'more than half')
 #    plt.close() 
     return plot
     
-def main() : 
-    exp = experiments
-    ind = index
-    while ind != [] :
-        print ind
-        num = rd.choice(ind)       
-        experiment_most(name,age,gender,colour_bld,eyesight,native_language,exp[num])
-        ind.remove(num)
+def main(exp) : 
+    if exp[2] == 0 : 
+        return experiment_most(exp)
+    if exp[2] == 1 : 
+        return experiment_mth(exp)
+#    exp = experiments
+#    ind = index
+#    while ind != [] :
+#        print ind
+#        num = rd.choice(ind)       
+#        experiment_most(name,age,gender,colour_bld,eyesight,native_language,exp[num])
+#        ind.remove(num)
         
         
 #----- Call the main function to run the code --------------
