@@ -67,25 +67,26 @@ def check_distance_dots(x,y,list_dots,dist_min):
 
 def get_dots_coordinates(n1,n2,dist) :    
     
+
     dist_min = dist   
-    list_dots_blue = []
-    list_dots_yellow = []
+    string_dots_blue = ""
+    string_dots_yellow = ""
     list_dots = []
     for blue_dot in range(n1):
         check = 0
         while check < dist_min : 
             x ,y = rd.uniform(-size+radius,size-radius) , rd.uniform(-size+radius,size-radius)
             check = check_distance_dots(x,y,list_dots,dist_min)
-        list_dots_blue.append((x,y))
+        string_dots_blue += '{x:'+str(x)+', y: '+str(x)+',color : "Blue"},'
         list_dots.append((x,y))
     for yellow_dot in range(n2):
         check = 0
         while check < dist_min : 
             x ,y = rd.uniform(-size+radius,size-radius) , rd.uniform(-size+radius,size-radius)
             check = check_distance_dots(x,y,list_dots,dist_min)
-        list_dots_yellow.append((x,y))  
+        string_dots_yellow += '{x:'+str(x)+', y: '+str(x)+',color : "Yellow"},'
         list_dots.append((x,y))
-    return list_dots_blue, list_dots_yellow
+    return string_dots_blue, string_dots_yellow
 
 def display_image(size,n1,n2,radius,dist,legend) : 
                     
@@ -234,8 +235,8 @@ def main(exp) :
 #        answer = 'wrong'
 #    save_result_to_csv(save_path_csv,name,age,gender, colour_bld,eyesight,native_language,nbr_blue,nbr_red,ratio,answer,answer_time,'more than half')
 #    plt.close() 
-    return list_blue, list_yellow
-#    print list_blue, list_yellow
+#    return list_blue, list_yellow
+    print list_blue, list_yellow
         
 
 #    exp = experiments
