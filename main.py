@@ -27,7 +27,7 @@ size = radius + size_windows
 save_path_csv ="D:\AI Master\Project MAIR\Test"
 
 #Get these input using PHP
-name = raw_input('What is your name ? ')
+#name = raw_input('What is your name ? ')
 #age = input('What is your age ?  ')
 #gender = raw_input('What is your gender ? (m/f) ')
 #colour_bld = raw_input('Are you colour blind ? (y/n) ')
@@ -215,10 +215,17 @@ def experiment_most(exp) :
     return 1
     
 def main(exp) : 
-    if exp[2] == 0 : 
-        return experiment_most(exp)
-    if exp[2] == 1 : 
-        return experiment_mth(exp)
+#    if exp[2] == 0 : 
+#        print experiment_most(exp)
+#    if exp[2] == 1 : 
+#        print experiment_mth(exp)
+
+        fig, ax = plt.subplots()
+        ax.add_artist(plt.Circle((0,0),1,color='b'))
+        return mpld3.fig_to_html(fig)
+
+
+
 #    exp = experiments
 #    ind = index
 #    while ind != [] :
