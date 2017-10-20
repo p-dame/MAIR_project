@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import csv
 import os
 from math import *
+import mpld3 
 
 # --------- GLOBAL PARAMETERS -----------------------------------------------------
 
@@ -44,6 +45,8 @@ index = []
 for j in range(5):
     for i in range(16):
         index.append(i)
+        
+exp = ((4,5),0)
         
 
 #----------FUNCTIONS -----------------------------------------------------------------
@@ -90,7 +93,7 @@ def display_image(size,n1,n2,radius,dist,legend) :
     plt.ion()
     plt.show()
     plt.pause(.001)
-    return ax
+    return mpld3.fig_to_html(ax)
 
             
 def display_image_paired_dots(size,n1,n2,radius,dist,legend) : 
@@ -124,35 +127,35 @@ def display_image_paired_dots(size,n1,n2,radius,dist,legend) :
             x ,y = rd.uniform(-size+dist,size-dist) , rd.uniform(-size+dist,size-dist)
             check = check_distance_dots(x,y,list_dots,dist_min)
         ax.add_artist(plt.Circle((x,y),radius,color=color_dots))
-        list_dots.append((x,y))           
+    return mpld3.fig_to_html(ax)
             
     
     plt.xlabel(legend)
     ax.set_xlim((-size, size))
     ax.set_ylim((-size, size))
     plt.ion()
-    plt.show()
-    plt.pause(.001)
+#    plt.show()
+#    plt.pause(.001)
     return ax
     
 
-def record_RT(): 
-    experiment = True 
-    beg=time.time()
-    while experiment : 
-        if keyboard.is_pressed('y') :
-            end=time.time()
-            experiment = False 
-            print('Yes')
-            print('Reaction time : '+str(end-beg))
-            answer = 'Yes'
-        elif keyboard.is_pressed('n') :
-            end=time.time()
-            experiment = False 
-            print('No')
-            print('Reaction time : '+str(end-beg))
-            answer = 'No'
-    return answer, end-beg
+#def record_RT(): 
+#    experiment = True 
+#    beg=time.time()
+#    while experiment : 
+#        if keyboard.is_pressed('y') :
+#            end=time.time()
+#            experiment = False 
+#            print('Yes')
+#            print('Reaction time : '+str(end-beg))
+#            answer = 'Yes'
+#        elif keyboard.is_pressed('n') :
+#            end=time.time()
+#            experiment = False 
+#            print('No')
+#            print('Reaction time : '+str(end-beg))
+#            answer = 'No'
+#    return answer, end-beg
     
 
 def save_result_to_csv(path,name,age,gender, colour_bld,eyesight,native_language,nbr_blue,nbr_red,ratio,answer,time,question) :
@@ -166,7 +169,7 @@ def save_result_to_csv(path,name,age,gender, colour_bld,eyesight,native_language
             spamwriter.writerow( (name, age,gender, colour_bld,eyesight,native_language,nbr_blue,nbr_red,ratio,answer,time,question) )
 
 
-def experiment_mth(name,age,gender, colour_bld,eyesight,native_language,exp) :
+def experiment_mth(exp) :
     
     nbr_blue = exp[0][1]
     nbr_red = exp[0][0]
@@ -177,18 +180,17 @@ def experiment_mth(name,age,gender, colour_bld,eyesight,native_language,exp) :
         correct_answer = 'Yes'
     else :
         correct_answer = 'No'
-    display_image(size,nbr_red,nbr_blue,radius,dist,'Are more than half of the dots blue ?')
+    plot = display_image(size,nbr_red,nbr_blue,radius,dist,'Are more than half of the dots blue ?')
     answer,answer_time = record_RT()
     if answer == correct_answer : 
         answer = 'right'
     else : 
         answer = 'wrong'
-    print answer
-    save_result_to_csv(save_path_csv,name,age,gender, colour_bld,eyesight,native_language,nbr_blue,nbr_red,ratio,answer,answer_time,'more than half')
-    plt.close() 
-    time.sleep(0.5)
+#    save_result_to_csv(save_path_csv,name,age,gender, colour_bld,eyesight,native_language,nbr_blue,nbr_red,ratio,answer,answer_time,'more than half')
+#    plt.close() 
+    return plot
     
-def experiment_most(name,age,gender, colour_bld,eyesight,native_language,exp) :
+def experiment_most(exp) :
 
     nbr_blue = exp[0][1]
     nbr_red = exp[0][0]
@@ -206,10 +208,9 @@ def experiment_most(name,age,gender, colour_bld,eyesight,native_language,exp) :
         answer = 'right'
     else : 
         answer = 'wrong'
-    print answer
-    save_result_to_csv(save_path_csv,name,age,gender, colour_bld,eyesight,native_language,nbr_blue,nbr_red,ratio,answer,answer_time,'more than half')
-    plt.close() 
-    time.sleep(0.5)
+#    save_result_to_csv(save_path_csv,name,age,gender, colour_bld,eyesight,native_language,nbr_blue,nbr_red,ratio,answer,answer_time,'more than half')
+#    plt.close() 
+    return plot
     
 def main() : 
     exp = experiments
@@ -218,7 +219,6 @@ def main() :
         print ind
         num = rd.choice(ind)       
         experiment_most(name,age,gender,colour_bld,eyesight,native_language,exp[num])
-        
         ind.remove(num)
         
         
