@@ -13,6 +13,7 @@ import csv
 import os
 from math import *
 import mpld3 
+import json
 
 # --------- GLOBAL PARAMETERS -----------------------------------------------------
 
@@ -222,9 +223,9 @@ def main(exp) :
 
         fig, ax = plt.subplots()
         ax.add_artist(plt.Circle((0,0),1,color='b'))
-        return mpld3.fig_to_html(fig)
-
-
+#        mpld3.display(fig)
+        return json.dumps(mpld3.fig_to_dict(fig))
+        
 
 #    exp = experiments
 #    ind = index
