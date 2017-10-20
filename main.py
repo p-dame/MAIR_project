@@ -27,12 +27,12 @@ size = radius + size_windows
 save_path_csv ="D:\AI Master\Project MAIR\Test"
 
 #Get these input using PHP
-name = raw_input('What is your name ? ')
-age = input('What is your age ?  ')
-gender = raw_input('What is your gender ? (m/f) ')
-colour_bld = raw_input('Are you colour blind ? (y/n) ')
-eyesight = raw_input('Do you have a corrected or normal eyesight ? (c/n) ')
-native_language = raw_input('What is your native language (english, dutch, french, spanish, german) ?) ')    
+#name = raw_input('What is your name ? ')
+#age = input('What is your age ?  ')
+#gender = raw_input('What is your gender ? (m/f) ')
+#colour_bld = raw_input('Are you colour blind ? (y/n) ')
+#eyesight = raw_input('Do you have a corrected or normal eyesight ? (c/n) ')
+#native_language = raw_input('What is your native language (english, dutch, french, spanish, german) ?) ')    
 
 #Creating the list of all the 16 types of trials
 ratios = [(4,5),(3,5),(2,5),(1,5),(29,71),(17,83),(10,90),(2,98)]
@@ -93,7 +93,7 @@ def display_image(size,n1,n2,radius,dist,legend) :
     plt.ion()
     plt.show()
     plt.pause(.001)
-    return mpld3.fig_to_html(ax)
+    return mpld3.fig_to_html(fig)
 
             
 def display_image_paired_dots(size,n1,n2,radius,dist,legend) : 
@@ -127,7 +127,7 @@ def display_image_paired_dots(size,n1,n2,radius,dist,legend) :
             x ,y = rd.uniform(-size+dist,size-dist) , rd.uniform(-size+dist,size-dist)
             check = check_distance_dots(x,y,list_dots,dist_min)
         ax.add_artist(plt.Circle((x,y),radius,color=color_dots))
-    return mpld3.fig_to_html(ax)
+    return mpld3.fig_to_html(fig)
             
     
     plt.xlabel(legend)
@@ -136,7 +136,7 @@ def display_image_paired_dots(size,n1,n2,radius,dist,legend) :
     plt.ion()
 #    plt.show()
 #    plt.pause(.001)
-    return ax
+    return fig 
     
 
 #def record_RT(): 
@@ -228,6 +228,6 @@ def main(exp) :
         
 #----- Call the main function to run the code --------------
     
-main()
+main(exp)
 
            
