@@ -65,10 +65,30 @@ def check_distance_dots(x,y,list_dots,dist_min):
             check = dist_min +1 
         return check
 
+def get_dots_coordinates(n1,n2,dist) :    
     
+    dist_min = dist   
+    list_dots_blue = []
+    list_dots_yellow = []
+    list_dots = []
+    for blue_dot in range(n1):
+        check = 0
+        while check < dist_min : 
+            x ,y = rd.uniform(-size+radius,size-radius) , rd.uniform(-size+radius,size-radius)
+            check = check_distance_dots(x,y,list_dots,dist_min)
+        list_dots_blue.append((x,y))
+        list_dots.append((x,y))
+    for yellow_dot in range(n2):
+        check = 0
+        while check < dist_min : 
+            x ,y = rd.uniform(-size+radius,size-radius) , rd.uniform(-size+radius,size-radius)
+            check = check_distance_dots(x,y,list_dots,dist_min)
+        list_dots_yellow.append((x,y))  
+        list_dots.append((x,y))
+    return list_dots_blue, list_dots_yellow
 
 def display_image(size,n1,n2,radius,dist,legend) : 
-    
+                    
     fig, ax = plt.subplots()
     dist_min = dist   
     list_dots = []
@@ -103,7 +123,6 @@ def display_image_paired_dots(size,n1,n2,radius,dist,legend) :
     dist_min = dist   
     list_dots = []   
     nbr_pairs = min(n1,n2)
-    list_dots = []
     for pair in range(nbr_pairs) :
         check = 0
         while check < dist_min : 
@@ -138,7 +157,10 @@ def display_image_paired_dots(size,n1,n2,radius,dist,legend) :
 #    plt.show()
 #    plt.pause(.001)
     return fig 
-    
+
+ 
+
+
 
 #def record_RT(): 
 #    experiment = True 
@@ -181,7 +203,7 @@ def experiment_mth(exp) :
 #        correct_answer = 'Yes'
 #    else :
 #        correct_answer = 'No'
-    plot = display_image(size,nbr_red,nbr_blue,radius,dist,'Are more than half of the dots blue ?')
+    list_blue, list_yellow = get_dots_coordinates(nbr_blue,nbr_yellow,dist)    
 #    answer,answer_time = record_RT()
 #    if answer == correct_answer : 
 #        answer = 'right'
@@ -190,21 +212,21 @@ def experiment_mth(exp) :
 #    save_result_to_csv(save_path_csv,name,age,gender, colour_bld,eyesight,native_language,nbr_blue,nbr_red,ratio,answer,answer_time,'more than half')
 #    plt.close() 
 #    return plot
-    return 0
+    return list_blue, list_yellow
     
-def experiment_most(exp) :
+def main(exp) :
 
     nbr_blue = exp[0][1]
-    nbr_red = exp[0][0]
-    ratio = float("{0:.2f}".format(nbr_blue/nbr_red))
+    nbr_yellow = exp[0][0]
+#    ratio = float("{0:.2f}".format(nbr_blue/nbr_yellow))
     if exp[1] == 1 : 
-        nbr_red,nbr_blue = nbr_blue,nbr_red
+        nbr_red,nbr_blue = nbr_blue,nbr_yellow
 #    if nbr_blue > nbr_red :
 #        correct_answer = 'Yes'
 #    else :
 #        correct_answer = 'No'
 #    print(correct_answer)
-    plot = display_image(size,nbr_red,nbr_blue,radius,dist,'Are most of the dots blue ?')
+    list_blue, list_yellow = get_dots_coordinates(nbr_blue,nbr_yellow,dist)    
 #    answer,answer_time = record_RT()
 #    if answer == correct_answer : 
 #        answer = 'right'
@@ -212,19 +234,8 @@ def experiment_most(exp) :
 #        answer = 'wrong'
 #    save_result_to_csv(save_path_csv,name,age,gender, colour_bld,eyesight,native_language,nbr_blue,nbr_red,ratio,answer,answer_time,'more than half')
 #    plt.close() 
-    return plot
-    return 1
-    
-def main(exp) : 
-#    if exp[2] == 0 : 
-#        print experiment_most(exp)
-#    if exp[2] == 1 : 
-#        print experiment_mth(exp)
-
-        fig, ax = plt.subplots()
-        ax.add_artist(plt.Circle((0,0),1,color='b'))
-#        mpld3.display(fig)
-        return json.dumps(mpld3.fig_to_dict(fig))
+    return list_blue, list_yellow
+#    print list_blue, list_yellow
         
 
 #    exp = experiments
