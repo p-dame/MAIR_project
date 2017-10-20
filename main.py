@@ -77,14 +77,14 @@ def get_dots_coordinates(n1,n2,dist) :
         while check < dist_min : 
             x ,y = rd.uniform(-size+radius,size-radius) , rd.uniform(-size+radius,size-radius)
             check = check_distance_dots(x,y,list_dots,dist_min)
-        string_dots_blue += '{x:'+str(x)+', y: '+str(x)+',color : "Blue", z=1 },'
+        string_dots_blue += '{x:'+str(x)+', y: '+str(x)+',color : "Blue", z:1 },'
         list_dots.append((x,y))
     for yellow_dot in range(n2):
         check = 0
         while check < dist_min : 
             x ,y = rd.uniform(-size+radius,size-radius) , rd.uniform(-size+radius,size-radius)
             check = check_distance_dots(x,y,list_dots,dist_min)
-        string_dots_yellow += '{x:'+str(x)+', y: '+str(x)+',color : "Yellow", z=1},'
+        string_dots_yellow += '{x:'+str(x)+', y: '+str(x)+',color : "Yellow", z:1},'
         list_dots.append((x,y))
     return string_dots_blue, string_dots_yellow
 
